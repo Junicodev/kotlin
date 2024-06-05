@@ -1,15 +1,20 @@
 package com.junicodev.androidmaster.imccalculator
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import com.google.android.material.slider.RangeSlider
 import com.junicodev.androidmaster.R
+import java.text.DecimalFormat
 
 class ImcCalculatorActivity : AppCompatActivity() {
 
     private lateinit var viewMale: CardView
     private lateinit var viewFemale: CardView
+    private lateinit var tvHeight: TextView
+    private lateinit var rsHeight: RangeSlider
 
     private var isMaleSelected: Boolean = true
 
@@ -24,6 +29,8 @@ class ImcCalculatorActivity : AppCompatActivity() {
     private fun initComponents() {
         viewMale = findViewById(R.id.viewMale)
         viewFemale = findViewById(R.id.viewFemale)
+        tvHeight = findViewById(R.id.tvHeight)
+        rsHeight = findViewById(R.id.rsHeight)
     }
 
     private fun initListeners() {
@@ -35,6 +42,7 @@ class ImcCalculatorActivity : AppCompatActivity() {
             isMaleSelected = false
             setGenderColor()
         }
+        rsHeight.addOnChangeListener { _, value, _ -> tvHeight.text = DecimalFormat("#.##").format(value) + " " + getString(R.string.unit) }
     }
 
     private fun setGenderColor() {

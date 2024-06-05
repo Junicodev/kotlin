@@ -3,4 +3,7 @@
     <string name="title_activity_menu">MenuActivity</string>
     <string name="female">Mujer</string>
     <string name="male">Hombre</string>
+    <string name="height">Altura</string>
+    <string name="unit">cm</string>
+    <string name="startUnit">120 cm</string>
 </resources>
