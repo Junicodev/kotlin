@@ -1,6 +1,8 @@
 package com.junicodev.androidmaster.imccalculator
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -22,9 +24,11 @@ class ImcCalculatorActivity : AppCompatActivity() {
     private lateinit var btnSubtractAge: FloatingActionButton
     private lateinit var btnAddAge: FloatingActionButton
     private lateinit var tvAge: TextView
+    private lateinit var btnCalculate: Button
 
     private var isMaleSelected: Boolean = true
     private var currentWeight: Int = 60
+    private var currentHeight: Double = 1.20
     private var currentAge: Int = 30
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +50,7 @@ class ImcCalculatorActivity : AppCompatActivity() {
         btnSubtractAge = findViewById(R.id.btnSubtractAge)
         btnAddAge = findViewById(R.id.btnAddAge)
         tvAge = findViewById(R.id.tvAge)
+        btnCalculate = findViewById(R.id.btnCalculate)
     }
 
     private fun initListeners() {
@@ -58,6 +63,7 @@ class ImcCalculatorActivity : AppCompatActivity() {
             setGenderColor()
         }
         rsHeight.addOnChangeListener { _, value, _ ->
+            currentHeight = value.toDouble() / 100
             tvHeight.text = DecimalFormat("#.##").format(value) + " " + getString(R.string.unit)
         }
         btnSubtractWeight.setOnClickListener {
@@ -76,6 +82,15 @@ class ImcCalculatorActivity : AppCompatActivity() {
             currentAge++
             setAge()
         }
+        btnCalculate.setOnClickListener {
+            calculateImc()
+        }
+    }
+
+    private fun calculateImc() {
+        val df = DecimalFormat("#.##")
+        val imc = df.format(currentWeight / (currentHeight * currentHeight))
+        Log.i("imc", "el imc es $imc")
     }
 
     private fun setWeight() {
