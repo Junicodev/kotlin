@@ -7,4 +7,5 @@
     <string name="unit">cm</string>
     <string name="startUnit">120 cm</string>
     <string name="Weight">Peso</string>
+    <string name="Age">Edad</string>
 </resources>
