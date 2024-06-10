@@ -1,7 +1,7 @@
 package com.junicodev.androidmaster.imccalculator
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +30,10 @@ class ImcCalculatorActivity : AppCompatActivity() {
     private var currentWeight: Int = 60
     private var currentHeight: Double = 1.20
     private var currentAge: Int = 30
+
+    companion object {
+        const val IMC_KEY = "IMC_RESULT"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,14 +87,20 @@ class ImcCalculatorActivity : AppCompatActivity() {
             setAge()
         }
         btnCalculate.setOnClickListener {
-            calculateImc()
+            val result = calculateImc()
+            navigateToResult(result)
         }
     }
 
-    private fun calculateImc() {
+    private fun navigateToResult(result: String) {
+        val intent = Intent(this,ResultIMCActivity::class.java)
+        intent.putExtra(IMC_KEY, result)
+        startActivity(intent)
+    }
+
+    private fun calculateImc(): String {
         val df = DecimalFormat("#.##")
-        val imc = df.format(currentWeight / (currentHeight * currentHeight))
-        Log.i("imc", "el imc es $imc")
+        return df.format(currentWeight / (currentHeight * currentHeight))
     }
 
     private fun setWeight() {
