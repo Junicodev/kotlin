@@ -21,4 +21,6 @@
     <string name="description_high_weight">Estás por encima de lo óptimo para tu peso y altura.</string>
     <string name="title_overweight">Obesidad</string>
     <string name="description_overweight">Estás muy por encima de lo óptimo para tu peso y altura.</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="categories">Categorías</string>
 </resources>
