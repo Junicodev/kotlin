@@ -23,4 +23,8 @@
     <string name="description_overweight">Estás muy por encima de lo óptimo para tu peso y altura.</string>
     <string name="welcome">Bienvenido</string>
     <string name="categories">Categorías</string>
+    <string name="business">Negocios</string>
+    <string name="other">Otros</string>
+    <string name="personal">Personal</string>
+    <string name="tasks">Tareas</string>
 </resources>
