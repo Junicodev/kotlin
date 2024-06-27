@@ -5,13 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.junicodev.androidmaster.R
+import com.junicodev.androidmaster.todoapp.TaskCategory.Business
+import com.junicodev.androidmaster.todoapp.TaskCategory.Other
+import com.junicodev.androidmaster.todoapp.TaskCategory.Personal
 
 class TodoActivity : AppCompatActivity() {
 
     private val categories = listOf(
-        TaskCategory.Business,
-        TaskCategory.Personal,
-        TaskCategory.Other
+        Business,
+        Personal,
+        Other
+    )
+
+    private val tasks = mutableListOf(
+        Task("TestBusiness", Business),
+        Task("TestPersonal", Personal),
+        Task("TestOther", Other),
     )
 
     private lateinit var rvCategories:RecyclerView
@@ -36,5 +45,10 @@ class TodoActivity : AppCompatActivity() {
         categoriesAdapter = CategoriesAdapter(categories)
         rvCategories.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvCategories.adapter = categoriesAdapter
+
+        tasksAdapter = TasksAdapter(tasks)
+        rvTasks.layoutManager = LinearLayoutManager(this)
+        rvTasks.adapter = tasksAdapter
+
     }
 }
