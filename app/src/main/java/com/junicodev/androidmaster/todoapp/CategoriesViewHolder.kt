@@ -11,7 +11,10 @@ class CategoriesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val tvCategoryName: TextView = view.findViewById(R.id.tvCategoryName)
     private val divider: View = view.findViewById(R.id.divider)
 
-    fun render(taskCategory: TaskCategory) {
+    fun render(taskCategory: TaskCategory, onItemSelected: (Int) -> Unit) {
+
+        itemView.setOnClickListener { onItemSelected(layoutPosition) }
+
         when (taskCategory) {
             TaskCategory.Business -> {
                 tvCategoryName.text = tvCategoryName.context.getString(R.string.business)
