@@ -48,6 +48,7 @@
 
     <Button
         android:id="@+id/btnAddTask"
+        android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/todo_accent"

@@ -2,7 +2,12 @@ package com.junicodev.androidmaster.todoapp
 
 import android.app.Dialog
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,6 +53,26 @@ class TodoActivity : AppCompatActivity() {
     private fun showDialog() {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_task)
+
+        val btnAddTask: Button = dialog.findViewById(R.id.btnAddTask)
+        val etTask: EditText = dialog.findViewById(R.id.etTask)
+        val rgCategories: RadioGroup = dialog.findViewById(R.id.rgCategories)
+
+        etTask.doAfterTextChanged { btnAddTask.isEnabled = etTask.text.toString().isNotEmpty() }
+
+        btnAddTask.setOnClickListener {
+            val selectedId = rgCategories.checkedRadioButtonId
+            val selectedRadioButton: RadioButton = rgCategories.findViewById(selectedId)
+            val currentCategory: TaskCategory = when (selectedRadioButton.text) {
+                getString(R.string.business) -> Business
+                getString(R.string.personal) -> Personal
+                else -> Other
+            }
+            tasks.add(Task(etTask.text.toString(), currentCategory))
+            updateTasks()
+            dialog.hide()
+        }
+
         dialog.show()
     }
 
@@ -66,6 +91,9 @@ class TodoActivity : AppCompatActivity() {
         tasksAdapter = TasksAdapter(tasks)
         rvTasks.layoutManager = LinearLayoutManager(this)
         rvTasks.adapter = tasksAdapter
+    }
 
+    private fun updateTasks() {
+        tasksAdapter.notifyDataSetChanged()
     }
 }
