@@ -1,5 +1,6 @@
 package com.junicodev.androidmaster.superheroapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.junicodev.androidmaster.databinding.ActivitySuperHeroListBinding
+import com.junicodev.androidmaster.superheroapp.DetailSuperHeroActivity.Companion.EXTRA_ID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,7 +42,7 @@ class SuperHeroListActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean = false
         })
 
-        adapter = SuperHeroAdapter()
+        adapter = SuperHeroAdapter { navigateToDetail(it) }
         binding.rvSuperHero.setHasFixedSize(true)
         binding.rvSuperHero.layoutManager = LinearLayoutManager(this)
         binding.rvSuperHero.adapter = adapter
@@ -70,5 +72,11 @@ class SuperHeroListActivity : AppCompatActivity() {
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder().baseUrl("https://superheroapi.com/")
             .addConverterFactory(GsonConverterFactory.create()).build()
+    }
+
+    private fun navigateToDetail(id: String) {
+        val intent = Intent(this, DetailSuperHeroActivity::class.java)
+        intent.putExtra(EXTRA_ID, id)
+        startActivity(intent)
     }
 }
