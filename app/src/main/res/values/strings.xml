@@ -28,5 +28,11 @@
     <string name="personal">Personal</string>
     <string name="tasks">Tareas</string>
     <string name="addTask">Añade la tarea</string>
+    <string name="intelligence">Int</string>
+    <string name="strength">Str</string>
+    <string name="speed">Speed</string>
+    <string name="power">Pow</string>
+    <string name="durability">Health</string>
+    <string name="combat">Combat</string>
 
 </resources>
