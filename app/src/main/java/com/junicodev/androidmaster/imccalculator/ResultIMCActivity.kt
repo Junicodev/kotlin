@@ -29,7 +29,7 @@ class ResultIMCActivity : AppCompatActivity() {
 
     private fun initUI(result:String) {
         tvIMC.text = result
-        when (result.toDouble()) {
+        when (result.replace(",", ".").toDouble()) {
             in 0.00..18.50 -> {
                 tvResult.text = getString(R.string.title_low_weight)
                 tvResult.setTextColor(ContextCompat.getColor(this, R.color.low_weight))
