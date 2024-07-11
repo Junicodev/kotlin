@@ -1,6 +1,7 @@
 package com.junicodev.androidmaster.superheroapp
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.junicodev.androidmaster.databinding.ActivityDetailSuperHeroBinding
@@ -11,6 +12,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.roundToInt
 
 class DetailSuperHeroActivity : AppCompatActivity() {
 
@@ -42,23 +44,27 @@ class DetailSuperHeroActivity : AppCompatActivity() {
     private fun createUI(superHero: SuperHeroItemResponse) {
         Picasso.get().load(superHero.image.url).into(binding.ivSuperHero)
         binding.tvSuperHeroName.text = superHero.name
+        binding.tvRealName.text = superHero.biography.fullName
+        binding.tvPublisher.text = superHero.biography.publisher
         prepareStats(superHero.powerStats)
     }
 
     private fun prepareStats(powerStats: PowerStatsResponse) {
-        updateHeight(binding.vCombat, powerStats.combat.toInt())
-        updateHeight(binding.vSpeed, powerStats.speed.toInt())
-        updateHeight(binding.vDurability, powerStats.durability.toInt())
-        updateHeight(binding.vPower, powerStats.power.toInt())
-        updateHeight(binding.vIntelligence, powerStats.intelligence.toInt())
-        updateHeight(binding.vStrength, powerStats.strength.toInt())
+        updateHeight(binding.vCombat, powerStats.combat)
+        updateHeight(binding.vSpeed, powerStats.speed)
+        updateHeight(binding.vDurability, powerStats.durability)
+        updateHeight(binding.vPower, powerStats.power)
+        updateHeight(binding.vIntelligence, powerStats.intelligence)
+        updateHeight(binding.vStrength, powerStats.strength)
     }
 
-    private fun updateHeight(view: View, stat: Int) {
+    private fun updateHeight(view: View, stat: String) {
         val params = view.layoutParams
-        params.height = stat
+        params.height = pixelToDp(stat.toFloat())
         view.layoutParams = params
     }
+
+    private fun pixelToDp(px: Float) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, px, resources.displayMetrics).roundToInt()
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder().baseUrl("https://superheroapi.com/")

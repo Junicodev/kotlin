@@ -31,7 +31,7 @@
     <string name="intelligence">Int</string>
     <string name="strength">Str</string>
     <string name="speed">Speed</string>
-    <string name="power">Pow</string>
+    <string name="power">Power</string>
     <string name="durability">Health</string>
     <string name="combat">Combat</string>
 

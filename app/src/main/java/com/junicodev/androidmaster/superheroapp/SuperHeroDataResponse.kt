@@ -12,6 +12,7 @@ data class SuperHeroItemResponse(
     @SerializedName("name") val name: String,
     @SerializedName("image") val image: SuperHeroImageResponse,
     @SerializedName("powerstats") val powerStats: PowerStatsResponse,
+    @SerializedName("biography") val biography: BiographyResponse,
 )
 
 data class SuperHeroImageResponse(
@@ -25,4 +26,9 @@ data class PowerStatsResponse(
     @SerializedName("durability") val durability: String,
     @SerializedName("power") val power: String,
     @SerializedName("combat") val combat: String
+)
+
+data class BiographyResponse(
+    @SerializedName("full-name") val fullName: String,
+    @SerializedName("publisher") val publisher: String,
 )

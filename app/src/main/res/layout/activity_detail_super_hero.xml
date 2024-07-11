@@ -42,6 +42,22 @@
                 android:textStyle="bold"
                 tools:text="Test" />
 
+            <TextView
+                android:id="@+id/tvRealName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                tools:text="Test" />
+
+            <TextView
+                android:id="@+id/tvPublisher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="11sp"
+                tools:text="Test" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,49 +126,49 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/intelligence" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
-                    android:gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/strength" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/speed" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
-                    android:gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/durability" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/power" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginHorizontal="4dp"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/combat" />
 
             </LinearLayout>
