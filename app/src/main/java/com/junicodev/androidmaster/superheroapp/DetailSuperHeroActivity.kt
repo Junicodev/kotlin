@@ -38,12 +38,13 @@ class DetailSuperHeroActivity : AppCompatActivity() {
         }
     }
 
-    private fun createUI(body: SuperHeroItemResponse) {
-        Picasso.get().load(body.image.url).into(binding.ivSuperHero)
+    private fun createUI(superHero: SuperHeroItemResponse) {
+        Picasso.get().load(superHero.image.url).into(binding.ivSuperHero)
+        binding.tvSuperHeroName.text = superHero.name
     }
 
-private fun getRetrofit(): Retrofit {
-    return Retrofit.Builder().baseUrl("https://superheroapi.com/")
-        .addConverterFactory(GsonConverterFactory.create()).build()
-}
+    private fun getRetrofit(): Retrofit {
+        return Retrofit.Builder().baseUrl("https://superheroapi.com/")
+            .addConverterFactory(GsonConverterFactory.create()).build()
+    }
 }
