@@ -1,6 +1,7 @@
 package com.junicodev.androidmaster.superheroapp
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.junicodev.androidmaster.databinding.ActivityDetailSuperHeroBinding
 import com.squareup.picasso.Picasso
@@ -41,6 +42,22 @@ class DetailSuperHeroActivity : AppCompatActivity() {
     private fun createUI(superHero: SuperHeroItemResponse) {
         Picasso.get().load(superHero.image.url).into(binding.ivSuperHero)
         binding.tvSuperHeroName.text = superHero.name
+        prepareStats(superHero.powerStats)
+    }
+
+    private fun prepareStats(powerStats: PowerStatsResponse) {
+        updateHeight(binding.vCombat, powerStats.combat.toInt())
+        updateHeight(binding.vSpeed, powerStats.speed.toInt())
+        updateHeight(binding.vDurability, powerStats.durability.toInt())
+        updateHeight(binding.vPower, powerStats.power.toInt())
+        updateHeight(binding.vIntelligence, powerStats.intelligence.toInt())
+        updateHeight(binding.vStrength, powerStats.strength.toInt())
+    }
+
+    private fun updateHeight(view: View, stat: Int) {
+        val params = view.layoutParams
+        params.height = stat
+        view.layoutParams = params
     }
 
     private fun getRetrofit(): Retrofit {

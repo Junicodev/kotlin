@@ -11,7 +11,7 @@ data class SuperHeroItemResponse(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
     @SerializedName("image") val image: SuperHeroImageResponse,
-    @SerializedName("powerStats") val powerStats: PowerStatsResponse,
+    @SerializedName("powerstats") val powerStats: PowerStatsResponse,
 )
 
 data class SuperHeroImageResponse(
