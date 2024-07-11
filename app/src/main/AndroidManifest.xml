@@ -28,6 +28,9 @@
             android:name=".imccalculator.ResultIMCActivity"
             android:exported="false" />
         <activity
+            android:name=".firstApp.ResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".imccalculator.ImcCalculatorActivity"
             android:exported="false" />
         <activity
