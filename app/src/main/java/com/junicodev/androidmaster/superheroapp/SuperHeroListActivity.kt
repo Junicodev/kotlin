@@ -3,10 +3,12 @@ package com.junicodev.androidmaster.superheroapp
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.junicodev.androidmaster.R
 import com.junicodev.androidmaster.databinding.ActivitySuperHeroListBinding
 import com.junicodev.androidmaster.superheroapp.DetailSuperHeroActivity.Companion.EXTRA_ID
 import kotlinx.coroutines.CoroutineScope
@@ -59,7 +61,8 @@ class SuperHeroListActivity : AppCompatActivity() {
                 if (response != null) {
                     Log.i("super", response.toString())
                     runOnUiThread {
-                        adapter.updateList(response.superheroes)
+                        if (response.superheroes != null) adapter.updateList(response.superheroes)
+                        else Toast.makeText(this@SuperHeroListActivity, getString(R.string.noResults), Toast.LENGTH_SHORT).show()
                         binding.pbSuperHero.isVisible = false
                     }
                 }

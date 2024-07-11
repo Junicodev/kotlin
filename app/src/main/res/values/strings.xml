@@ -34,5 +34,6 @@
     <string name="power">Power</string>
     <string name="durability">Health</string>
     <string name="combat">Combat</string>
+    <string name="noResults">No hay resultados</string>
 
 </resources>
