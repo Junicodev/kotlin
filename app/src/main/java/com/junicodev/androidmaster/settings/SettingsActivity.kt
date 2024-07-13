@@ -12,6 +12,9 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.junicodev.androidmaster.databinding.ActivitySettingsBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -26,11 +29,25 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivitySettingsBinding
+    private var firstTime: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        CoroutineScope(Dispatchers.IO).launch {
+            getSettings().filter { firstTime }.collect {
+                if (it != null) {
+                    runOnUiThread {
+                        binding.swVibration.isChecked = it.vibration
+                        binding.swBluetooth.isChecked = it.bluetooth
+                        binding.swDarkMode.isChecked = it.darkMode
+                        binding.rgVolume.setValues(it.volume.toFloat())
+                        firstTime != firstTime
+                    }
+                }
+            }
+        }
         initUI()
     }
 
@@ -69,6 +86,17 @@ class SettingsActivity : AppCompatActivity() {
     private suspend fun saveOptions(key: String, value: Boolean) {
         dataStore.edit {
             it[booleanPreferencesKey(key)] = value
+        }
+    }
+
+    private fun getSettings(): Flow<SettingsModel?> {
+        return dataStore.data.map {
+            SettingsModel(
+                volume = it[intPreferencesKey(VOLUME)] ?: 50,
+                bluetooth = it[booleanPreferencesKey(BLUETOOTH)] ?: false,
+                vibration = it[booleanPreferencesKey(VIBRATION)] ?: true,
+                darkMode = it[booleanPreferencesKey(DARK_MODE)] ?: false
+            )
         }
     }
 }
