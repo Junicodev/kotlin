@@ -59,9 +59,11 @@ class DetailSuperHeroActivity : AppCompatActivity() {
     }
 
     private fun updateHeight(view: View, stat: String) {
-        val params = view.layoutParams
-        params.height = pixelToDp(stat.toFloat())
-        view.layoutParams = params
+        if (stat != "null") {
+            val params = view.layoutParams
+            params.height = pixelToDp(stat.toFloat())
+            view.layoutParams = params
+        }
     }
 
     private fun pixelToDp(px: Float) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, px, resources.displayMetrics).roundToInt()
