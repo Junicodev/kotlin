@@ -3,6 +3,7 @@ package com.junicodev.androidmaster.settings
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -65,6 +66,8 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         binding.swDarkMode.setOnCheckedChangeListener { _, value ->
+            AppCompatDelegate.setDefaultNightMode(if (value) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
+            delegate.applyDayNight()
             CoroutineScope(Dispatchers.IO).launch {
                 saveOptions(DARK_MODE, value)
             }
